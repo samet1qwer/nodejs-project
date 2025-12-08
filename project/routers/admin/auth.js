@@ -26,4 +26,7 @@ router.post("/admin", (req, res) => {
     });
 });
 
+router.get("/admin/sign-up", (req, res) => {
+  res.render("admin/sign-up");
+});
 module.exports = router;
