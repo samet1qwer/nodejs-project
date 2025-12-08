@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const about = require("../../models/aboutMe");
+const users = require("../../models/users");
+const bcrypt = require("bcrypt");
+const xss = require("xss");
 
 router.get("/admin", (req, res) => {
   res.render("admin/sign-in");
@@ -28,5 +31,9 @@ router.post("/admin", (req, res) => {
 
 router.get("/admin/sign-up", (req, res) => {
   res.render("admin/sign-up");
+});
+router.post("/admin/sign-up", (req, res) => {
+  const data = req.body;
+  console.log(data);
 });
 module.exports = router;
