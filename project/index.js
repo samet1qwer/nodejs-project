@@ -25,12 +25,21 @@ app.use(express.static(path.join(__dirname, "public/admin")));
 const AboutMe = require("./models/aboutMe");
 const users = require("./models/users");
 
-const user = new users({
-  name: "samet",
-  email: "samet@gmail.com",
-  password: "1234",
-  role: "admin",
-});
+// const user = new users({
+//   name: "samet",
+//   email: "samet@gmail.com",
+//   password: "1234",
+//   role: "admin",
+// });
+// (async () => {
+//   try {
+//     const result = await user.save();
+//     console.log(result);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// })();
+
 const save = async () => {
   try {
     const result = await about.save();
