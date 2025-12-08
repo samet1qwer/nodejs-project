@@ -7,7 +7,7 @@ const path = require("path");
 mongoose
   .connect("mongodb://127.0.0.1:27017/portfolio")
   .then(() => {
-    console.log("Mongoose is connected ✅");
+    console.log("Mongoose is connected");
   })
   .catch((err) => console.log("mongoose connection error:", err));
 
@@ -23,7 +23,14 @@ app.use(express.static(path.join(__dirname, "public/user")));
 app.use(express.static(path.join(__dirname, "public/admin")));
 
 const AboutMe = require("./models/aboutMe");
+const users = require("./models/users");
 
+const user = new users({
+  name: "samet",
+  email: "samet@gmail.com",
+  password: "1234",
+  role: "admin",
+});
 const save = async () => {
   try {
     const result = await about.save();

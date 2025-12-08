@@ -17,6 +17,11 @@ const users = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  role: {
+    type: String,
+    enum: ["user", "moderator", "admin"],
+    default: "user",
+  },
 });
 
 module.exports = mongoose.model("users", users);
