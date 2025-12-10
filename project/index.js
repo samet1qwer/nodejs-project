@@ -52,13 +52,32 @@ save();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// session
+
+const session = require("express-session");
+
+app.use(
+  session({
+    secret: "samet-secret-key",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: false,
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24,
+    },
+  })
+);
+
 // routers
 const userRouter = require("./routers/user/user");
 const adminRouter = require("./routers/admin/auth");
 const { type } = require("os");
+const dashboard = require("./routers/admin/dashbord");
 
 app.use(userRouter);
 app.use(adminRouter);
+app.use(dashboard);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
