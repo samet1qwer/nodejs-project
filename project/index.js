@@ -74,10 +74,12 @@ const userRouter = require("./routers/user/user");
 const adminRouter = require("./routers/admin/auth");
 const { type } = require("os");
 const dashboard = require("./routers/admin/dashbord");
+const settings = require("./routers/admin/settings");
 
 app.use(userRouter);
 app.use(adminRouter);
 app.use(dashboard);
+app.use(settings);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
