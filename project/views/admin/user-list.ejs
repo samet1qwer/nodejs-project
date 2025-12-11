@@ -396,27 +396,10 @@
                   <h6 class="text-white text-capitalize ps-3">Authors table</h6>
                 </div>
               </div>
-              <% if (!req.session.message === "undefined") { %>
-              <div>
-                <div
-                  class="alert alert-success alert-dismissible fade show"
-                  role="alert"
-                >
-                  <span class="alert-text text-white"
-                    ><strong>Success!</strong> ${req.session.message}</span
-                  >
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-              </div>
+              <% if (session && session.message) { %> Swal.fire({ title: "Drag
+              me!", icon: "success", draggable: true }); <% session.message =
+              null; %> <% } %>
 
-              <% } %>
               <div class="card-body px-0 pb-2">
                 <div class="table-responsive p-0">
                   <table class="table align-items-center mb-0">
