@@ -28,20 +28,26 @@ router.get("/admin/user-edit/:id", isAdmin, async (req, res) => {
 router.post("/admin/user-edit/:id", isAdmin, async (req, res) => {
   try {
     const id = req.params.id;
-    const name = req.body.name;
-    const email = req.body.email;
-    const role = req.body.role;
+    const { name, email, role } = req.body;
+
     const user = await users.findById(id);
+    if (!user) {
+      req.session.message = "User not found!";
+      return res.redirect("/admin/user-list");
+    }
+
     user.name = name;
     user.email = email;
     user.role = role;
+
     await user.save();
+
     req.session.message = "User updated successfully!";
-    res.redirect("/admin/user-list", { session: req.session });
+    return res.redirect("/admin/user-list");
   } catch (err) {
     console.log(err);
     req.session.message = "Server error!";
-    res.redirect("/admin/user-list", { session: req.session });
+    return res.redirect("/admin/user-list");
   }
 });
 
