@@ -16,10 +16,10 @@ router.get("/admin/user-list", isAdmin, async (req, res) => {
 router.get("/admin/user-edit/:id", isAdmin, async (req, res) => {
   try {
     const user = await users.findById(req.params.id);
-    res.render("admin/user-edit", { users: user });
+    res.render("admin/user-edit", { user: user });
   } catch (err) {
     console.log(err);
-    res.render("admin/user-edit", { users: [] });
+    res.render("admin/user-edit", { user: [] });
   }
 });
 
