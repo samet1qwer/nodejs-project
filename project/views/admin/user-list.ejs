@@ -396,9 +396,6 @@
                   <h6 class="text-white text-capitalize ps-3">Authors table</h6>
                 </div>
               </div>
-              <% if (session && session.message) { %> Swal.fire({ title: "Drag
-              me!", icon: "success", draggable: true }); <% session.message =
-              null; %> <% } %>
 
               <div class="card-body px-0 pb-2">
                 <div class="table-responsive p-0">
@@ -413,7 +410,7 @@
                         <th
                           class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                         >
-                          status
+                          role
                         </th>
                         <th
                           class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
@@ -465,12 +462,12 @@
                         </td>
                         <td class="align-middle">
                           <a
-                            href="javascript:;"
+                            href="/admin/user-edit/<%= user._id %>"
                             class="text-secondary font-weight-bold text-xs"
                             data-toggle="tooltip"
                             data-original-title="Edit user"
                           >
-                            Edit
+                            edit
                           </a>
                         </td>
                       </tr>
@@ -657,5 +654,19 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="/js/material-dashboard.min.js?v=3.2.0"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <% if (session && session.message) { %>
+    <script>
+      Swal.fire({
+        icon: "success",
+        title: "Başarılı!",
+        text: "<%= session.message %>",
+        confirmButtonText: "Tamam",
+      });
+    </script>
+
+    <% session.message = null; %> <% } %>
   </body>
 </html>
