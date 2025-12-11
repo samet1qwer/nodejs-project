@@ -13,6 +13,8 @@ router.get("/admin/user-list", isAdmin, async (req, res) => {
   }
 });
 
+// edit
+
 router.get("/admin/user-edit/:id", isAdmin, async (req, res) => {
   try {
     const user = await users.findById(req.params.id);
@@ -20,6 +22,26 @@ router.get("/admin/user-edit/:id", isAdmin, async (req, res) => {
   } catch (err) {
     console.log(err);
     res.render("admin/user-edit", { user: [] });
+  }
+});
+
+router.post("/admin/user-edit/:id", isAdmin, async (req, res) => {
+  try {
+    const id = req.params.id;
+    const name = req.body.name;
+    const email = req.body.email;
+    const role = req.body.role;
+    const user = await users.findById(id);
+    user.name = name;
+    user.email = email;
+    user.role = role;
+    await user.save();
+    req.session.message = "User updated successfully!";
+    res.redirect("/admin/user-list", { session: req.session });
+  } catch (err) {
+    console.log(err);
+    req.session.message = "Server error!";
+    res.redirect("/admin/user-list", { session: req.session });
   }
 });
 
