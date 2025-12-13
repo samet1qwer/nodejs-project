@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, "public/admin")));
 
 const AboutMe = require("./models/aboutMe");
 const users = require("./models/users");
-
+const about = require("./models/About");
 // const user = new users({
 //   name: "samet",
 //   email: "samet@gmail.com",

@@ -16,6 +16,7 @@
     "express": "^5.2.1",
     "express-session": "^1.18.2",
     "mongoose": "^9.0.1",
+    "multer": "^2.0.2",
     "path": "^0.12.7",
     "session": "^0.1.0",
     "xss": "^1.0.15"
