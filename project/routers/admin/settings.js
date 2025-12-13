@@ -3,6 +3,7 @@ const router = express.Router();
 const isAdmin = require("./islogged");
 const users = require("../../models/users");
 const { default: xss } = require("xss");
+const upload = require("./upload");
 
 router.get("/admin/user-list", isAdmin, async (req, res) => {
   try {
@@ -56,24 +57,33 @@ router.get("/admin/about", isAdmin, async (req, res) => {
   res.render("admin/about", { session: req.session });
 });
 
-router.post("/admin/about", isAdmin, async (req, res) => {
-  try {
-    const data = req.body;
+router.post(
+  "/admin/about",
+  isAdmin,
+  upload.single("image"),
+  async (req, res) => {
+    try {
+      const data = req.body;
 
-    const about = xss(data.about);
-    const mail = xss(data.mail);
-    const telephone = xss(data.telephone);
-    const image = xss(data.image);
-    const aboutMe = new about({ about, mail, telephone, image });
-    await aboutMe.save();
+      const about = xss(data.about);
+      const mail = xss(data.mail);
+      const telephone = xss(data.telephone);
+      const image = null;
+      if (req.file) {
+        image = req.file.filename;
+      }
 
-    req.session.message = "About updated successfully!";
-    return res.redirect("/admin/about");
-  } catch (err) {
-    console.log(err);
-    req.session.message = "Server error!";
-    return res.redirect("/admin/about");
+      const aboutMe = new about({ about, mail, telephone, image });
+      await aboutMe.save();
+
+      req.session.message = "About updated successfully!";
+      return res.redirect("/admin/about");
+    } catch (err) {
+      console.log(err);
+      req.session.message = "Server error!";
+      return res.redirect("/admin/about");
+    }
   }
-});
+);
 
 module.exports = router;
