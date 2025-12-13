@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const isAdmin = require("./islogged");
 const users = require("../../models/users");
-const { default: xss } = require("xss");
+const xss = require("xss");
 const upload = require("./upload");
-
+const About = require("../../models/About");
 router.get("/admin/user-list", isAdmin, async (req, res) => {
   try {
     const allUsers = await users.find();
@@ -63,18 +63,25 @@ router.post(
   upload.single("image"),
   async (req, res) => {
     try {
-      const data = req.body;
+      const { about, mail, telephone } = req.body;
 
-      const about = xss(data.about);
-      const mail = xss(data.mail);
-      const telephone = xss(data.telephone);
-      const image = null;
+      const aboutText = xss(about);
+      const safeMail = xss(mail);
+      const safeTelephone = xss(telephone);
+
+      const id = "693dc31bf537ac7016a680a3";
+
+      const updateData = {
+        about: aboutText,
+        mail: safeMail,
+        telephone: safeTelephone,
+      };
+
       if (req.file) {
-        image = req.file.filename;
+        updateData.image = "/uploads/about/" + req.file.filename;
       }
 
-      const aboutMe = new about({ about, mail, telephone, image });
-      await aboutMe.save();
+      await About.findByIdAndUpdate(id, updateData);
 
       req.session.message = "About updated successfully!";
       return res.redirect("/admin/about");

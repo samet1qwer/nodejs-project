@@ -24,31 +24,8 @@ app.use(express.static(path.join(__dirname, "public/admin")));
 
 const AboutMe = require("./models/aboutMe");
 const users = require("./models/users");
-const about = require("./models/About");
-// const user = new users({
-//   name: "samet",
-//   email: "samet@gmail.com",
-//   password: "1234",
-//   role: "admin",
-// });
-// (async () => {
-//   try {
-//     const result = await user.save();
-//     console.log(result);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// })();
+const About = require("./models/About");
 
-const save = async () => {
-  try {
-    const result = await about.save();
-    console.log(result);
-  } catch (err) {
-    console.log(err);
-  }
-};
-save();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
