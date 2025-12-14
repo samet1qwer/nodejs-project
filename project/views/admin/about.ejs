@@ -370,7 +370,7 @@
       <!-- End Navbar -->
       <div class="container-fluid py-2">
         <div class="row col-6">
-            <form action="/admin/about" method="post" enctype="multipart/form-data">
+            <form action="/admin/about" method="post"  enctype="multipart/form-data">
 
                 <label for="about">about</label>
                 <div class="input-group input-group-outline mb-3">
@@ -394,6 +394,21 @@
                     class="form-control" 
                     required
                   />
+                </div>
+                <label for="address">address</label>
+                <div class="input-group input-group-outline mb-3">
+                  <input 
+                    type="address" 
+                    id="address" 
+                    name="address" 
+                    value="" 
+                    class="form-control" 
+                    required
+                  />
+                </div>
+                <label for="hero_about">hero about</label>
+                <div class="input-group input-group-outline mb-3">
+                 <textarea name="hero_about" id="hero_about" cols="30" rows="10"></textarea>
                 </div>
               
                 <label for="telephone">Telephone</label>

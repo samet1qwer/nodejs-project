@@ -63,23 +63,21 @@ router.post(
   upload.single("image"),
   async (req, res) => {
     try {
-      const { about, mail, telephone } = req.body;
-
-      const aboutText = xss(about);
-      const safeMail = xss(mail);
-      const safeTelephone = xss(telephone);
-
-      const id = "693dc31bf537ac7016a680a3";
+      const { about, mail, telephone, address, hero_about } = req.body;
 
       const updateData = {
-        about: aboutText,
-        mail: safeMail,
-        telephone: safeTelephone,
+        about: xss(about),
+        mail: xss(mail),
+        telephone: xss(telephone),
+        address: xss(address),
+        hero_about: xss(hero_about),
       };
 
       if (req.file) {
         updateData.image = "/uploads/about/" + req.file.filename;
       }
+
+      const id = "693ee6cf762ca52bf1e17250";
 
       await About.findByIdAndUpdate(id, updateData);
 
