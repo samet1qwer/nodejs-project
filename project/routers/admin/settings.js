@@ -5,6 +5,7 @@ const users = require("../../models/users");
 const xss = require("xss");
 const upload = require("./upload");
 const About = require("../../models/About");
+const information = require("../../models/information");
 router.get("/admin/user-list", isAdmin, async (req, res) => {
   try {
     const allUsers = await users.find();
@@ -92,5 +93,46 @@ router.post(
     }
   }
 );
+
+router.get("/admin/information", isAdmin, async (req, res) => {
+  res.render("admin/information", { session: req.session });
+});
+
+router.post("/admin/information", isAdmin, async (req, res) => {
+  try {
+    const {
+      name,
+      Birthday,
+      email,
+      phone,
+      experiences,
+      customers,
+      projects,
+      awards,
+    } = req.body;
+
+    const updateData = {
+      name: xss(name),
+      Birthday: xss(Birthday),
+      email: xss(email),
+      phone: xss(phone),
+      experiences: xss(experiences),
+      customers: xss(customers),
+      projects: xss(projects),
+      awards: xss(awards),
+    };
+
+    const id = "693f1d2587d877cfa6184790";
+
+    await information.findByIdAndUpdate(id, updateData);
+
+    req.session.message = "Information updated successfully!";
+    return res.redirect("/admin/information");
+  } catch (err) {
+    console.log(err);
+    req.session.message = "Server error!";
+    return res.redirect("/admin/information");
+  }
+});
 
 module.exports = router;
