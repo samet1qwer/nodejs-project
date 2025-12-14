@@ -378,7 +378,7 @@
                     type="text" 
                     id="about" 
                     name="about" 
-                    value="" 
+                    value="<%= about.about %>" 
                     class="form-control" 
                     required
                   />
@@ -390,7 +390,7 @@
                     type="email" 
                     id="email" 
                     name="email" 
-                    value="" 
+                    value="<%= about.email %>" 
                     class="form-control" 
                     required
                   />
@@ -401,23 +401,25 @@
                     type="address" 
                     id="address" 
                     name="address" 
-                    value="" 
+                     value="<%= about.address %>"  
                     class="form-control" 
                     required
                   />
                 </div>
                 <label for="hero_about">hero about</label>
                 <div class="input-group input-group-outline mb-3">
-                 <textarea name="hero_about" id="hero_about" cols="30" rows="10"></textarea>
+                 <textarea name="hero_about" id="hero_about" cols="30" rows="10"> <%= about.hero_about %></textarea>
                 </div>
               
                 <label for="telephone">Telephone</label>
                 <div class="input-group input-group-outline mb-3">
-                 <input type="text" id="telephone" name="telephone" value="" class="form-control" required>
+                 <input type="text" id="telephone" name="telephone" value="<%= about.telephone %>" class="form-control" required>
                 </div>
                 <label for="image">image</label>
-                <div class="input-group input-group-outline mb-3">
-                 <input type="file" id="image" name="image" value="" class="form-control" required>
+                <div class="input-group input-group-outline mb-3 ">
+                   <img src="<%= about.image %>" alt="image" style="width: 100px; height: 100px;">
+
+                 <input type="file" id="image" name="image"  class="form-control" required>
                 </div>
 
                 

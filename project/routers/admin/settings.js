@@ -54,7 +54,8 @@ router.post("/admin/user-edit/:id", isAdmin, async (req, res) => {
 });
 
 router.get("/admin/about", isAdmin, async (req, res) => {
-  res.render("admin/about", { session: req.session });
+  const about = await About.findById("693ee6cf762ca52bf1e17250");
+  res.render("admin/about", { session: req.session, about: about });
 });
 
 router.post(
@@ -71,10 +72,11 @@ router.post(
         telephone: xss(telephone),
         address: xss(address),
         hero_about: xss(hero_about),
+        image: "/user/images/" + req.file.filename,
       };
 
       if (req.file) {
-        updateData.image = "/uploads/about/" + req.file.filename;
+        updateData.image = "/user/images/" + req.file.filename;
       }
 
       const id = "693ee6cf762ca52bf1e17250";
