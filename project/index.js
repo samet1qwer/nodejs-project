@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, "public/admin")));
 const AboutMe = require("./models/aboutMe");
 const users = require("./models/users");
 const About = require("./models/About");
-
+const Information = require("./models/information");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
