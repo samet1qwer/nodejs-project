@@ -26,6 +26,8 @@ const AboutMe = require("./models/aboutMe");
 const users = require("./models/users");
 const About = require("./models/About");
 const Information = require("./models/information");
+const Contact = require("./models/contact");
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
