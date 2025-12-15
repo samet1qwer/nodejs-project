@@ -407,7 +407,7 @@
                         >
                           name
                         </th>
-                       
+
                         <th
                           class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                         >
@@ -427,39 +427,55 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <% contacts.forEach(contact => { %>
                       <tr>
-                        <td>
-                          
-                            <div
-                              class="d-flex flex-column justify-content-center"
-                            >
-                              <h6 class="mb-0 text-sm"></h6>
-                              <p class="text-xs text-secondary mb-0">
-                              </p>
-                            </div>
+                        <td class="align-middle pr-1">
+                          <div
+                            class="d-flex flex-column justify-content-center"
+                          >
+                            <h6 class="mb-0 text-sm"><%= contact.name %></h6>
+                            <p class="text-xs text-secondary mb-0">
+                              <%= contact.email %>
+                            </p>
                           </div>
                         </td>
-                        <td>
-                          <p
-                            class="text-xs font-weight-bold mb-0 "
-                          >
+
+                        <td class="align-middle text-center">
+                          <p class="text-xs font-weight-bold mb-0">
+                            <% if (Array.isArray(contact.category)) { %> <%=
+                            contact.category.join(", ") %> <% } else { %> <%=
+                            contact.category %> <% } %>
                           </p>
                         </td>
 
                         <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold"></span>
+                          <span
+                            class="badge badge-sm <%= contact.status === 'active' ? 'bg-success' : contact.status === 'pending' ? 'bg-warning' : 'bg-secondary' %>"
+                          >
+                            <%= contact.status %>
+                          </span>
                         </td>
+
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">
+                            <%= new
+                            Date(contact.createdAt).toLocaleDateString("tr-TR")
+                            %>
+                          </span>
+                        </td>
+
                         <td class="align-middle">
                           <a
-                            href=""
+                            href="/admin/contact/<%= contact._id %>"
                             class="text-secondary font-weight-bold text-xs"
                             data-toggle="tooltip"
-                            data-original-title="Edit user"
+                            title="View Message"
                           >
-                            <i class="material-symbols-rounded"></i>
+                            <i class="material-symbols-rounded">visibility</i>
                           </a>
                         </td>
                       </tr>
+                      <% }) %>
                     </tbody>
                   </table>
                 </div>

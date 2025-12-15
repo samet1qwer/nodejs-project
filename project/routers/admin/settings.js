@@ -138,7 +138,8 @@ router.post("/admin/information", isAdmin, async (req, res) => {
 });
 
 router.get("/admin/contact", async (req, res) => {
-  res.render("admin/contact", { session: req.session });
+  const contacts = await Contact.find();
+  res.render("admin/contact", { session: req.session, contacts: contacts });
 });
 
 router.post("/admin/contact", async (req, res) => {
