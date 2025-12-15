@@ -135,4 +135,8 @@ router.post("/admin/information", isAdmin, async (req, res) => {
   }
 });
 
+router.get("/admin/contact", async (req, res) => {
+  res.render("admin/contact", { session: req.session });
+});
+
 module.exports = router;
