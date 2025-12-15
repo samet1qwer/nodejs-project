@@ -182,4 +182,18 @@ router.get("/admin/contact/:id", async (req, res) => {
   }
 });
 
+router.post("/admin/contact/status/:id", async (req, res) => {
+  try {
+    const contact = await Contact.findById(req.params.id);
+    contact.status = req.body.status;
+    await contact.save();
+    req.session.message = "Status updated successfully!";
+    res.redirect(`/admin/contact/${req.params.id}`);
+  } catch (err) {
+    console.log(err);
+    req.session.message = "Server error!";
+    res.redirect(`/admin/contact/${req.params.id}`);
+  }
+});
+
 module.exports = router;
