@@ -6,6 +6,8 @@ const xss = require("xss");
 const upload = require("./upload");
 const About = require("../../models/About");
 const information = require("../../models/information");
+const Contact = require("../../models/contact");
+
 router.get("/admin/user-list", isAdmin, async (req, res) => {
   try {
     const allUsers = await users.find();
@@ -137,6 +139,34 @@ router.post("/admin/information", isAdmin, async (req, res) => {
 
 router.get("/admin/contact", async (req, res) => {
   res.render("admin/contact", { session: req.session });
+});
+
+router.post("/admin/contact", async (req, res) => {
+  try {
+    const { name, email, message } = req.body;
+    const safeCategory = xss(req.body.services) || "Other";
+
+    const safeName = xss(name);
+    const safeEmail = xss(email);
+    const safeMessage = xss(message);
+    // const safeCategory = xss(category);
+
+    const contact = new Contact({
+      name: safeName,
+      email: safeEmail,
+      message: safeMessage,
+      category: safeCategory,
+    });
+
+    await contact.save();
+
+    req.session.message = "Message sent successfully!";
+    return res.redirect("/");
+  } catch (err) {
+    console.log(err);
+    req.session.message = "Server error!";
+    return res.redirect("/");
+  }
 });
 
 module.exports = router;

@@ -15,6 +15,7 @@ const contact = new mongoose.Schema({
   },
   category: {
     type: String,
+    enum: ["seo", "websites", "ecommerce", "branding"],
     required: true,
   },
   status: {

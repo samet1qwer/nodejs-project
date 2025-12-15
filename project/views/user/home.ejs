@@ -256,7 +256,7 @@ https://templatemo.com/tm-578-first-portfolio
 
                                         <div class="col-lg-3 col-md-6 col-6">
                                             <div class="form-check form-check-inline">
-                                                <input name="website" type="checkbox" class="form-check-input" id="inlineCheckbox1" value="1">
+                                                <input name="services[]" type="checkbox" class="form-check-input" id="inlineCheckbox1" value="websites">
 
                                                 <label class="form-check-label" for="inlineCheckbox1">
                                                     <i class="bi-globe form-check-icon"></i>
@@ -267,7 +267,7 @@ https://templatemo.com/tm-578-first-portfolio
 
                                         <div class="col-lg-3 col-md-6 col-6">
                                             <div class="form-check form-check-inline">
-                                                <input name="branding" type="checkbox" class="form-check-input" id="inlineCheckbox2" value="1">
+                                                <input name="services[]" type="checkbox" class="form-check-input" id="inlineCheckbox2" value="branding">
 
                                                 <label class="form-check-label" for="inlineCheckbox2">
                                                     <i class="bi-lightbulb form-check-icon"></i>
@@ -278,7 +278,7 @@ https://templatemo.com/tm-578-first-portfolio
 
                                         <div class="col-lg-3 col-md-6 col-6">
                                             <div class="form-check form-check-inline">
-                                                <input name="ecommerce" type="checkbox" class="form-check-input" id="inlineCheckbox3" value="1">
+                                                <input name="services[]" type="checkbox" class="form-check-input" id="inlineCheckbox3" value="ecommerce">
 
                                                 <label class="form-check-label" for="inlineCheckbox3">
                                                     <i class="bi-phone form-check-icon"></i>
@@ -289,7 +289,7 @@ https://templatemo.com/tm-578-first-portfolio
 
                                         <div class="col-lg-3 col-md-6 col-6">
                                             <div class="form-check form-check-inline me-0">
-                                                <input name="seo" type="checkbox" class="form-check-input" id="inlineCheckbox4" value="1">
+                                                <input name="services[]" type="checkbox" class="form-check-input" id="inlineCheckbox4" value="seo">
 
                                                 <label class="form-check-label" for="inlineCheckbox4">
                                                     <i class="bi-google form-check-icon"></i>
@@ -331,6 +331,20 @@ https://templatemo.com/tm-578-first-portfolio
         <script src="/js/jquery.magnific-popup.min.js"></script>
         <script src="/js/magnific-popup-options.js"></script>
         <script src="/js/custom.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <% if (session && session.message) { %>
+<script>
+  Swal.fire({
+    icon: "success",
+    title: "Success",
+    text: "<%= session.message %>"
+  });
+</script>
+<% session.message = null; %>
+<% } %>
+
+
 
     </body>
 </html>
