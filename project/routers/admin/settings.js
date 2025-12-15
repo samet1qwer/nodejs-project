@@ -144,18 +144,17 @@ router.get("/admin/contact", async (req, res) => {
 router.post("/admin/contact", async (req, res) => {
   try {
     const { name, email, message } = req.body;
-    const safeCategory = xss(req.body.services) || "Other";
 
-    const safeName = xss(name);
-    const safeEmail = xss(email);
-    const safeMessage = xss(message);
-    // const safeCategory = xss(category);
+    let services = req.body.services || [];
+    if (!Array.isArray(services)) {
+      services = [services];
+    }
 
     const contact = new Contact({
-      name: safeName,
-      email: safeEmail,
-      message: safeMessage,
-      category: safeCategory,
+      name: xss(name),
+      email: xss(email),
+      message: xss(message),
+      category: services.map((s) => xss(s)),
     });
 
     await contact.save();
