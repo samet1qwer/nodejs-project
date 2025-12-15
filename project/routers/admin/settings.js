@@ -169,4 +169,17 @@ router.post("/admin/contact", async (req, res) => {
   }
 });
 
+router.get("/admin/contact/:id", async (req, res) => {
+  try {
+    const contact = await Contact.findById(req.params.id);
+    res.render("admin/contact-details", {
+      contact: contact,
+      session: req.session,
+    });
+  } catch (err) {
+    console.log(err);
+    res.render("admin/contact-details", { contact: [], session: req.session });
+  }
+});
+
 module.exports = router;
