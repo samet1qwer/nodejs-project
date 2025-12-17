@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const about = require("../../models/About");
 
-router.get("/", (req, res) => {
-  res.render("user/home", { session: req.session });
+router.get("/", async (req, res) => {
+  const aboutData = await about.findById("693ee6cf762ca52bf1e17250");
+  res.render("user/home", { session: req.session, aboutData: aboutData });
 });
 
 module.exports = router;
