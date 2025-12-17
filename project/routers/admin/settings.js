@@ -97,7 +97,13 @@ router.post(
 );
 
 router.get("/admin/information", isAdmin, async (req, res) => {
-  res.render("admin/information", { session: req.session });
+  const informationData = await information.findById(
+    "693f1d2587d877cfa6184790"
+  );
+  res.render("admin/information", {
+    session: req.session,
+    information: informationData,
+  });
 });
 
 router.post("/admin/information", isAdmin, async (req, res) => {
