@@ -8,6 +8,11 @@ const About = require("../../models/About");
 const information = require("../../models/information");
 const Contact = require("../../models/contact");
 
+router.use((req, res, next) => {
+  res.locals.currentPath = req.path;
+  next();
+});
+
 router.get("/admin/user-list", isAdmin, async (req, res) => {
   try {
     const allUsers = await users.find();
