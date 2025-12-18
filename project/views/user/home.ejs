@@ -336,8 +336,8 @@ https://templatemo.com/tm-578-first-portfolio
     <% if (session && session.message) { %>
 <script>
   Swal.fire({
-    icon: "success",
-    title: "Success",
+    icon: "<%= session.status %>",
+    title: "<%= session.status %>",
     text: "<%= session.message %>"
   });
 </script>

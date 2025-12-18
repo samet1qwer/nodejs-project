@@ -7,6 +7,8 @@ const upload = require("./upload");
 const About = require("../../models/About");
 const information = require("../../models/information");
 const Contact = require("../../models/contact");
+const { validationResult } = require("express-validator");
+const { contactValidator } = require("../../validators/contact.validator");
 
 router.use((req, res, next) => {
   res.locals.currentPath = req.path;
@@ -153,9 +155,16 @@ router.get("/admin/contact", async (req, res) => {
   res.render("admin/contact", { session: req.session, contacts: contacts });
 });
 
-router.post("/admin/contact", async (req, res) => {
+router.post("/admin/contact", contactValidator, async (req, res) => {
   try {
     const { name, email, message } = req.body;
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      req.session.message = errors.array()[0].msg;
+      req.session.status = "error";
+      return res.redirect("/");
+    }
 
     let services = req.body.services || [];
     if (!Array.isArray(services)) {
@@ -172,6 +181,7 @@ router.post("/admin/contact", async (req, res) => {
     await contact.save();
 
     req.session.message = "Message sent successfully!";
+    req.session.status = "success";
     return res.redirect("/");
   } catch (err) {
     console.log(err);

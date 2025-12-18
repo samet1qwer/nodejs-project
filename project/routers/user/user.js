@@ -8,6 +8,7 @@ router.get("/", async (req, res) => {
   const informationData = await information.findById(
     "693f1d2587d877cfa6184790"
   );
+
   res.render("user/home", {
     session: req.session,
     about: aboutData,
