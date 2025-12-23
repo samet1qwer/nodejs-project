@@ -16,8 +16,7 @@ app.listen(port, () => {
 });
 
 app.set("view engine", "ejs");
-
-app.set("views", "./views");
+app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "public/user")));
 app.use(express.static(path.join(__dirname, "public/admin")));
@@ -68,7 +67,7 @@ const logout = require("./routers/admin/logout");
 app.use(userRouter);
 app.use(adminRouter);
 app.use(dashboard);
-app.use(settings);
+app.use("/admin", settings);
 app.use(logout);
 
 app.listen(port, () => {
