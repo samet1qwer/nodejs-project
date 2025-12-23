@@ -48,6 +48,16 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  res.setHeader(
+    "Cache-Control",
+    "no-store, no-cache, must-revalidate, private"
+  );
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
+  next();
+});
+
 // routers
 const userRouter = require("./routers/user/user");
 const adminRouter = require("./routers/admin/auth");
