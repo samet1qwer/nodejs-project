@@ -150,12 +150,12 @@ router.post("/admin/information", isAdmin, async (req, res) => {
   }
 });
 
-router.get("/admin/contact", async (req, res) => {
+router.get("/admin/contact", isAdmin, async (req, res) => {
   const contacts = await Contact.find();
   res.render("admin/contact", { session: req.session, contacts: contacts });
 });
 
-router.post("/admin/contact", contactValidator, async (req, res) => {
+router.post("/admin/contact", isAdmin, contactValidator, async (req, res) => {
   try {
     const { name, email, message } = req.body;
 
@@ -190,7 +190,7 @@ router.post("/admin/contact", contactValidator, async (req, res) => {
   }
 });
 
-router.get("/admin/contact/:id", async (req, res) => {
+router.get("/admin/contact/:id", isAdmin, async (req, res) => {
   try {
     const contact = await Contact.findById(req.params.id);
     res.render("admin/contact-details", {
@@ -203,7 +203,7 @@ router.get("/admin/contact/:id", async (req, res) => {
   }
 });
 
-router.post("/admin/contact/status/:id", async (req, res) => {
+router.post("/admin/contact/status/:id", isAdmin, async (req, res) => {
   try {
     const contact = await Contact.findById(req.params.id);
     contact.status = req.body.status;
