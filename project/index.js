@@ -54,11 +54,13 @@ const adminRouter = require("./routers/admin/auth");
 const { type } = require("os");
 const dashboard = require("./routers/admin/dashbord");
 const settings = require("./routers/admin/settings");
-
+const logout = require("./routers/admin/logout");
 app.use(userRouter);
 app.use(adminRouter);
 app.use(dashboard);
 app.use(settings);
+app.use(logout);
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
